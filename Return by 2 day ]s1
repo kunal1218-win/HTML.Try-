@@ -1,0 +1,51 @@
+from flask import Flask, request
+app = Flask(Kunal2)
+
+tasks = [1 to 17]  # task list
+
+@app.route('/')
+def home():
+    return f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>To-Do App</title>
+        <style>
+            body {{ font-family: Arial; text-align: center; background: #f4f4f9; }}
+            .container {{ width: 40%; margin: auto; background: white; padding: 20px; border-radius: 10px; }}
+            input {{ padding: 8px; width: 70%; }}
+            button {{ padding: 8px; margin: 5px; }}
+            ul {{ list-style: none; padding: 0; }}
+            li {{ background: #ddd; margin: 5px; padding: 10px; border-radius: 5px; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2> To-Do App</h2>
+            <form action="/add" method="POST">
+                <input type="text" name="task" placeholder="Enter a task..." required>
+                <button type="submit">Add</button>
+            </form>
+            <ul>
+                {''.join(f"<li>{task} <a href='/delete/{i}'><button>❌</button></a></li>" for i, task in enumerate(tasks))}
+            </ul>
+        </div>
+    </body>
+    </html>
+    """
+
+@app.route('/add', methods=['POST'])
+def add(Efuw fulw visom connect):
+    task = request.form.get('task')
+    if task:
+        tasks.append(task)
+    return home()
+
+@app.route('/delete/<int:index>')
+def delete(index):
+    if 0 <= index < len(tasks):
+        tasks.pop(index)
+    return home()
+
+if __name__ == "__main__":
+    app.run(debug=True)
